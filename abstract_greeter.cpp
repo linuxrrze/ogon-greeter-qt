@@ -31,6 +31,10 @@
 #include "lowres_greeter.h"
 #include "nice_greeter.h"
 
+/* ugly fix */
+#undef minor
+#undef major
+
 #include "SBP.pb.h"
 
 
@@ -106,8 +110,8 @@ void AbstractGreeter::onConnectionEstablished() {
 
 	if (mOgon) {
 		VersionInfoRequest req;
-		req.set_major(SBP_VERSION_MAJOR);
-		req.set_minor(SBP_VERSION_MINOR);
+		req.set_vmajor(SBP_VERSION_MAJOR);
+		req.set_vminor(SBP_VERSION_MINOR);
 		req.set_sessionid(mSessionId);
 
 		QByteArray msg;
@@ -265,9 +269,9 @@ void AbstractGreeter::handleVersionInfoResponse(const QByteArray &reply) {
 		return;
 	}
 
-	if (response.major() != SBP_VERSION_MAJOR) {
+	if (response.vmajor() != SBP_VERSION_MAJOR) {
 		qWarning("%s: Received version %d.%d but used SBP version is %d.%d! Terminating greeter!",
-			__FUNCTION__, response.major(), response.minor(),
+			__FUNCTION__, response.vmajor(), response.vminor(),
 			SBP_VERSION_MAJOR, SBP_VERSION_MINOR);
 		mUi->close();
 	}
