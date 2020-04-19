@@ -31,7 +31,6 @@
 #include "lowres_greeter.h"
 #include "nice_greeter.h"
 
-/* ugly fix */
 #undef minor
 #undef major
 
