@@ -31,9 +31,6 @@
 #include "lowres_greeter.h"
 #include "nice_greeter.h"
 
-#undef minor
-#undef major
-
 #include "SBP.pb.h"
 
 
